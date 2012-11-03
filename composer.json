@@ -8,14 +8,14 @@
         "api",
 		"phing"
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/iwalz/zendserverapi.git"
-        },
+	"repositories": [
 		{
-        	"type": "composer",
-	    	"url": "http://packages.zendframework.com/"
+			"type": "vcs",
+			"url": "https://github.com/iwalz/zendserverapi.git"
+		},
+		{
+			"type": "composer",
+			"url": "http://packages.zendframework.com/"
 		}
     ],
     "homepage": "https://github.com/iwalz/zendserverapi-phing",
@@ -32,6 +32,9 @@
     },
     "minimum-stability": "dev",
     "autoload": {
-        "classmap": [ "src/" ]
+        "classmap": [ "src/" ],
+        "psr-0": {
+        	"\\ZendServerAPI": "vendor/iwalz/zendserverapi/src"
+        }
     }
 }

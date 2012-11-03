@@ -1,5 +1,6 @@
 <?php
 require_once 'phing/Task.php';
+require_once __DIR__.'/../../vendor/composer/autoload_classmap.php';
 require_once __DIR__.'/../../vendor/autoload.php';
 
 class Parameter extends Task

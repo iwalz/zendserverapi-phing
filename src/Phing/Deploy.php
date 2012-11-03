@@ -1,8 +1,9 @@
 <?php
 require_once 'phing/Task.php';
+require_once __DIR__.'/../../vendor/composer/autoload_classmap.php';
 require_once __DIR__.'/../../vendor/autoload.php';
 
-class Deploy extends Task
+class Deploy extends ZSApiTask
 {
     private $appPackage = null;
     private $baseUrl = null;
@@ -62,8 +63,6 @@ class Deploy extends Task
     
     public function init () 
     {
-        $this->deployment = new \ZendServerAPI\Deployment();
-        
         $this->ignoreFailures = false;
         $this->defaultServer = false;
         $this->createVhost = false;
@@ -71,15 +70,16 @@ class Deploy extends Task
     
     public function main() 
     {
+        $this->deployment = new \ZendServerAPI\Deployment($this->name);
         $userParams = array();
         foreach($this->parameters as $parameter)
         {
             $userParams[$parameter->getName()] = $parameter->getValue();
         }
-        
+
         try {
-            /* @var $this->deployment \ZendServerAPI\Deployment */
-            $this->deployment->applicationDeploy(
+            /** @var $this->deployment \ZendServerAPI\Deployment */
+            $deploy = $this->deployment->applicationDeploy(
                 $this->appPackage, 
                 $this->baseUrl, 
                 $this->createVhost, 
@@ -91,6 +91,8 @@ class Deploy extends Task
             echo "Deploy failed: " . $e->getMessage() . PHP_EOL;
             return -1;
         }
+        
+        $this->setProperties($deploy);
     }
 }
 
