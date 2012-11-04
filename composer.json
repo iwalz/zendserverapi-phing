@@ -27,10 +27,8 @@
         "zendserverapi/zendserverapi": "dev-master"
     },
     "minimum-stability": "dev",
+    "include-path": ["src/"],
     "autoload": {
-        "classmap": [ "src/" ],
-        "psr-0": {
-        	"\\ZendServerAPI": "vendor/iwalz/zendserverapi/src"
-        }
+        "classmap": [ "src/" ]
     }
 }
