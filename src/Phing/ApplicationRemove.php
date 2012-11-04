@@ -1,7 +1,7 @@
 <?php
 require_once 'phing/Task.php';
-require_once getcwd().'/vendor/composer/autoload_classmap.php';
-require_once getcwd().'/vendor/autoload.php';
+require_once 'vendor/composer/autoload_classmap.php';
+require_once 'vendor/autoload.php';
 
 class ApplicationRemove extends ZSApiTask
 {
