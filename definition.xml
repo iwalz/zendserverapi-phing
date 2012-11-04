@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="zsapi-phing" default="init">
+<project name="zsapi-phing">
 	<includepath classpath="${php.classpath}:${project.basedir}/src" />
-	<taskdef name="zsapi-deploy" classname="Phing.Deploy"/>
-	<taskdef name="zsapi-remove" classname="Phing.Remove"/>
-	
-	<target name="init">
-	
-	</target>
+	<taskdef name="applicationDeploy" classname="Phing.ApplicationDeploy"/>
+	<taskdef name="applicationRemove" classname="Phing.ApplicationRemove"/>
+	<taskdef name="applicationUpdate" classname="Phing.ApplicationUpdate"/>
+	<taskdef name="applicationRollback" classname="Phing.ApplicationRollback"/>
 </project>

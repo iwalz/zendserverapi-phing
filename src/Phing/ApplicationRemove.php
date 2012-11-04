@@ -3,7 +3,7 @@ require_once 'phing/Task.php';
 require_once __DIR__.'/../../vendor/composer/autoload_classmap.php';
 require_once __DIR__.'/../../vendor/autoload.php';
 
-class Remove extends ZSApiTask
+class ApplicationRemove extends ZSApiTask
 {
     private $appId = null;
     private $deployment = null;
@@ -17,11 +17,13 @@ class Remove extends ZSApiTask
         $this->deployment = new \ZendServerAPI\Deployment($this->name);
         try {
             /** @var $this->deployment \ZendServerAPI\Deployment */
-            $this->deployment->applicationRemove($this->appId);
+            $remove = $this->deployment->applicationRemove($this->appId);
         } catch(Exception $e) {
             echo "Remove failed: " . $e->getMessage() . PHP_EOL;
             return -1;
         }
+        
+        $this->setProperties($remove);
     }
 }
 

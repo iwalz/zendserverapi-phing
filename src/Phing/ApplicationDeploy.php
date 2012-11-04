@@ -3,7 +3,7 @@ require_once 'phing/Task.php';
 require_once __DIR__.'/../../vendor/composer/autoload_classmap.php';
 require_once __DIR__.'/../../vendor/autoload.php';
 
-class Deploy extends ZSApiTask
+class ApplicationDeploy extends ZSApiTask
 {
     private $appPackage = null;
     private $baseUrl = null;
