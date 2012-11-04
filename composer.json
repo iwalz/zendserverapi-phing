@@ -1,5 +1,5 @@
 {
-    "name": "iwalz/zendserverapi-phing",
+    "name": "zendserverapi/zendserverapi-phing",
     "description": "Zend Server API Phing Wrapper",
     "type": "library",
     "license": "MIT",
@@ -10,13 +10,9 @@
     ],
 	"repositories": [
 		{
-			"type": "vcs",
-			"url": "https://github.com/iwalz/zendserverapi.git"
-		},
-	    {
-        	"type": "composer",
-        	"url": "http://packages.zendframework.com/"
-    	}
+			"type": "composer",
+			"url": "http://packages.zendframework.com/"
+		}
     ],
     "homepage": "https://github.com/iwalz/zendserverapi-phing",
     "authors": [
@@ -28,7 +24,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "iwalz/zendserverapi": "dev-master"
+        "zendserverapi/zendserverapi": "dev-master"
     },
     "minimum-stability": "dev",
     "autoload": {
