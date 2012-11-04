@@ -13,10 +13,10 @@
 			"type": "vcs",
 			"url": "https://github.com/iwalz/zendserverapi.git"
 		},
-		{
-			"type": "composer",
-			"url": "http://packages.zendframework.com/"
-		}
+	    {
+        	"type": "composer",
+        	"url": "http://packages.zendframework.com/"
+    	}
     ],
     "homepage": "https://github.com/iwalz/zendserverapi-phing",
     "authors": [
