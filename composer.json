@@ -27,7 +27,7 @@
         "zendserverapi/zendserverapi": "dev-master"
     },
     "minimum-stability": "dev",
-    "include-path": ["src/"],
+    "include-path": ["vendor/zendserverapi/zendserverapi-phing/src/"],
     "autoload": {
         "classmap": [ "src/" ]
     }
