@@ -1,5 +1,7 @@
 # Zend Server API - phing integration
-===================================
+=====================================
+
+<b>For usage instructions, see the [Wiki section](https://github.com/iwalz/zendserverapi-phing/wiki)</b>
 
 ## Installation via composer 
 To install the Zend Server API phing integration, your <code>composer.json</code> file should look like this:
@@ -91,4 +93,4 @@ It's quite easy to make the phing tasks available - just 1 line of code in your 
 ```xml
 <import file="vendor/zendserverapi/zendserverapi-phing/definition.xml"/>
 ```
-And you can start using the provided tasks. See the wiki section for further information.
+And you can start using the provided tasks. 
