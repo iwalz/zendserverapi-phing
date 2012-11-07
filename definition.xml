@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="zsapi-phing">
-	<includepath classpath="${php.classpath}:${project.basedir}/vendor/zendserverapi/zendserverapi-phing/src" />
+
+	<adhoc-task name="filetodirectory"><![CDATA[ 
+	class FileToDirectory extends Task {
+		/**
+		 * File to receive the directory for.
+		 * @var string
+		 */
+		private $file;
+		/**
+		 * The property name to set in your Phing environment.
+		 * @var string
+		 */
+		private $propertyName;
+
+		/**
+		 * Set the name of the property to set.
+		 * @param string $name Property name
+		 * @return void
+		 */
+		public function setPropertyName($name) {
+			$this->propertyName = $name;
+		}
+		
+		/**
+		 * Set the filename to receive the directory for.
+		 * @param string $file File name
+		 * @return void
+		 */
+		public function setFile($file) {
+			$this->file = $file;			
+		}
+
+		/**
+		 * Perform the directory calculation.
+		 */
+		function main() {
+			if (!$this->propertyName) {
+				throw new BuildException("You must specify the propertyName attribute", $this->getLocation());
+			}
+		
+			$dir = dirname($this->file);
+			$this->log("Directory for " . $this->file . " is " . $dir);
+			$this->getProject()->setProperty($this->propertyName, $dir);
+		}
+	}
+	]]></adhoc-task>
+
+	<!-- 
+		Calculate installation directory, relative to the current file. 
+		Phing seems not to have a convenient method to receive the path where the current buildfile is stored. 
+	-->
+	<resolvepath propertyName="zsapi-file" file="${phing.file.zsapi_phing}" />
+	<filetodirectory propertyName="zsapi-basedir" file="${zsapi-file}" />
+	<!-- Set include path to autoload Phing tasks -->
+	<includepath classpath="${php.classpath}:${zsapi-basedir}/src" />
+	
+	<!-- Define ZendServer specific tasks -->
 	<taskdef name="applicationDeploy" classname="Phing.ApplicationDeploy"/>
 	<taskdef name="applicationRemove" classname="Phing.ApplicationRemove"/>
 	<taskdef name="applicationUpdate" classname="Phing.ApplicationUpdate"/>
 	<taskdef name="applicationRollback" classname="Phing.ApplicationRollback"/>
+	
 </project>
