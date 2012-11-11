@@ -34,7 +34,17 @@ class ApplicationDeploy extends ZSApiTask
     private $ignoreFailures = null;
     private $userAppName = null;
     private $parameters = array();
+    private $waitForStableState = null;
     private $deployment = null;
+    
+    public function setWaitForStatbleState($waitFor) 
+    {
+        if(1 == $waitFor) {
+            $this->waitForStableState = true;
+        } else {
+            $this->waitForStableState = false;
+        }
+    }
     
     public function setUserAppName($userAppName)
     {
@@ -111,6 +121,10 @@ class ApplicationDeploy extends ZSApiTask
                 $userParams);
         } catch(Exception $e) {
             throw new  \BuildException($e);
+        }
+        
+        if($this->waitForStableState) {
+            $this->deployment->waitForStableState($deploy->getId());
         }
         
         $this->buildProperties($deploy);
