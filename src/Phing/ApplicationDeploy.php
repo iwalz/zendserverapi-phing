@@ -50,17 +50,17 @@ class ApplicationDeploy extends ZSApiTask
     {
         $this->userAppName = $userAppName;
     }
-    
-    public function setAppPackage($appPackage) 
+
+    public function setAppPackage($appPackage)
     {
         $this->appPackage = $appPackage;
     }
-    
+
     public function setBaseUrl($baseUrl)
     {
         $this->baseUrl = $baseUrl;
     }
-    
+
     public function setCreateVhost($createVhost)
     {
         if(1 == $createVhost) {
@@ -69,7 +69,7 @@ class ApplicationDeploy extends ZSApiTask
             $this->createVhost = false;
         }
     }
-    
+
     public function setDefaultServer($defaultServer)
     {
         if(1 == $defaultServer) {
@@ -78,7 +78,7 @@ class ApplicationDeploy extends ZSApiTask
             $this->defaultServer = false;
         }
     }
-    
+
     public function setIgnoreFailures($ignoreFailures)
     {
         if(1 == $ignoreFailures) {
@@ -87,20 +87,20 @@ class ApplicationDeploy extends ZSApiTask
             $this->ignoreFailures = false;
         }
     }
-    
+
     public function addParameter(Parameter $parameter)
     {
         $this->parameters[] = $parameter;
     }
-    
-    public function init () 
+
+    public function init ()
     {
         $this->ignoreFailures = false;
         $this->defaultServer = false;
         $this->createVhost = false;
     }
-    
-    public function main() 
+
+    public function main()
     {
         $this->deployment = new \ZendServerAPI\Deployment($this->server);
         $userParams = array();
@@ -112,10 +112,10 @@ class ApplicationDeploy extends ZSApiTask
         try {
             /** @var $this->deployment \ZendServerAPI\Deployment */
             $deploy = $this->deployment->applicationDeploy(
-                $this->appPackage, 
-                $this->baseUrl, 
-                $this->createVhost, 
-                $this->defaultServer, 
+                $this->appPackage,
+                $this->baseUrl,
+                $this->createVhost,
+                $this->defaultServer,
                 $this->userAppName,
                 $this->ignoreFailures,
                 $userParams);
