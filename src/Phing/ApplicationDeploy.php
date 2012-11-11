@@ -37,7 +37,7 @@ class ApplicationDeploy extends ZSApiTask
     private $waitForStableState = null;
     private $deployment = null;
     
-    public function setWaitForStatbleState($waitFor) 
+    public function setWaitForStableState($waitFor) 
     {
         if(1 == $waitFor) {
             $this->waitForStableState = true;
