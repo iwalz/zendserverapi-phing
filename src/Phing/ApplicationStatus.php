@@ -19,7 +19,7 @@ require_once 'vendor/composer/autoload_classmap.php';
 require_once 'vendor/autoload.php';
 
 /**
- * ApplicationDeploy phing task.
+ * ApplicationStatus phing task.
  *
  * @license     MIT
  * @link        http://github.com/iwalz/zendserverapi-phing
