@@ -61,12 +61,10 @@ abstract class ZSApiTask extends Task
             } else {
                 if(is_null($parent)) {
                     $propertyKey = $this->returnProperty.'.'.$key;
-                    if(!$this->project->getProperty($propertyKey))
-                        $this->project->setProperty($propertyKey, $value);
+                    $this->project->setProperty($propertyKey, $value);
                 } else {
                     $propertyKey = $this->returnProperty.'.'.$parent.'.'.$key;
-                    if(!$this->project->getProperty($propertyKey))
-                        $this->project->setProperty($propertyKey, $value);
+                    $this->project->setProperty($propertyKey, $value);
                 }
             }
         }

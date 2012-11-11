@@ -7,4 +7,6 @@
 	<taskdef name="applicationStatus" classname="Phing.ApplicationStatus"/>
 	<taskdef name="applicationUpdate" classname="Phing.ApplicationUpdate"/>
 	<taskdef name="applicationRollback" classname="Phing.ApplicationRollback"/>
+	
+	<taskdef name="restartPhp" classname="Phing.RestartPhp"/>
 </project>
