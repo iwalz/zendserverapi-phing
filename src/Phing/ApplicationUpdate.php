@@ -76,11 +76,10 @@ class ApplicationUpdate extends ZSApiTask
                     $this->ignoreFailures, 
                     $userParams);
         } catch(Exception $e) {
-            echo "Remove failed: " . $e->getMessage() . PHP_EOL;
-            return -1;
+            throw new  \BuildException($e);
         }
         
-        $this->setProperties($update);
+        $this->buildProperties($update);
     }
 }
 

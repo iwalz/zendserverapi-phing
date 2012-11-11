@@ -42,11 +42,10 @@ class ApplicationRollback extends ZSApiTask
             /** @var $this->deployment \ZendServerAPI\Deployment */
             $rollback = $this->deployment->applicationRollback($this->appId);
         } catch(Exception $e) {
-            echo "Remove failed: " . $e->getMessage() . PHP_EOL;
-            return -1;
+            throw new  \BuildException($e);
         }
         
-        $this->setProperties($rollback);
+        $this->buildProperties($rollback);
     }
 }
 

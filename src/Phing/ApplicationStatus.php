@@ -25,15 +25,11 @@ require_once 'vendor/autoload.php';
  * @link        http://github.com/iwalz/zendserverapi-phing
  * @author      Ingo Walz <ingo.walz@googlemail.com>
  */
-class ApplicationDeploy extends ZSApiTask
+class ApplicationStatus extends ZSApiTask
 {
-    private $appPackage = null;
     private $baseUrl = null;
-    private $createVhost = null;
-    private $defaultServer = null;
-    private $ignoreFailures = null;
     private $userAppName = null;
-    private $parameters = array();
+    private $appName = null;
     private $deployment = null;
     
     public function setUserAppName($userAppName)
@@ -41,9 +37,9 @@ class ApplicationDeploy extends ZSApiTask
         $this->userAppName = $userAppName;
     }
     
-    public function setAppPackage($appPackage) 
+    public function setAppName($appName)
     {
-        $this->appPackage = $appPackage;
+        $this->appName = $appName;
     }
     
     public function setBaseUrl($baseUrl)
@@ -51,69 +47,36 @@ class ApplicationDeploy extends ZSApiTask
         $this->baseUrl = $baseUrl;
     }
     
-    public function setCreateVhost($createVhost)
-    {
-        if(1 == $createVhost) {
-            $this->createVhost = true;
-        } else {
-            $this->createVhost = false;
-        }
-    }
-    
-    public function setDefaultServer($defaultServer)
-    {
-        if(1 == $defaultServer) {
-            $this->defaultServer = true;
-        } else {
-            $this->defaultServer = false;
-        }
-    }
-    
-    public function setIgnoreFailures($ignoreFailures)
-    {
-        if(1 == $ignoreFailures) {
-            $this->ignoreFailures = true;
-        } else {
-            $this->ignoreFailures = false;
-        }
-    }
-    
-    public function addParameter(Parameter $parameter)
-    {
-        $this->parameters[] = $parameter;
-    }
-    
-    public function init () 
-    {
-        $this->ignoreFailures = false;
-        $this->defaultServer = false;
-        $this->createVhost = false;
-    }
-    
     public function main() 
     {
         $this->deployment = new \ZendServerAPI\Deployment($this->server);
-        $userParams = array();
-        foreach($this->parameters as $parameter)
-        {
-            $userParams[$parameter->getName()] = $parameter->getValue();
-        }
-
+        $found = false;
+        
         try {
             /** @var $this->deployment \ZendServerAPI\Deployment */
-            $deploy = $this->deployment->applicationDeploy(
-                $this->appPackage, 
-                $this->baseUrl, 
-                $this->createVhost, 
-                $this->defaultServer, 
-                $this->userAppName,
-                $this->ignoreFailures,
-                $userParams);
+            $deploy = $this->deployment->applicationGetStatus();
         } catch(Exception $e) {
             throw new  \BuildException($e);
         }
         
-        $this->buildProperties($deploy);
+        foreach($deploy as $app) {
+            if($this->baseUrl && $this->baseUrl == $app->getBaseUrl()) {
+                $found = true;
+                $this->buildProperties($app);
+                break;
+            } elseif($this->userAppName && $this->userAppName == $app->getUserAppName()) {
+                $found = true;
+                $this->buildProperties($app);
+                break;
+            } elseif($this->appName && $this->appName == $app->getAppName()) {
+                $found = true;
+                $this->buildProperties($app);
+                break;
+            }
+        }
+        
+        if(!$found)
+            $this->project->setProperty($this->returnProperty, false);
     }
 }
 

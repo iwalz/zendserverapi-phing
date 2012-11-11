@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="zsapi-phing">
-	<includepath classpath="${php.classpath}:${project.basedir}/vendor/zendserverapi/zendserverapi-phing/src" />
+	<includepath classpath="${php.classpath}:src" />
 	<taskdef name="applicationDeploy" classname="Phing.ApplicationDeploy"/>
 	<taskdef name="applicationRemove" classname="Phing.ApplicationRemove"/>
+	<taskdef name="applicationStatus" classname="Phing.ApplicationStatus"/>
 	<taskdef name="applicationUpdate" classname="Phing.ApplicationUpdate"/>
 	<taskdef name="applicationRollback" classname="Phing.ApplicationRollback"/>
 </project>

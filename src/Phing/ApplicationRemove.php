@@ -41,11 +41,10 @@ class ApplicationRemove extends ZSApiTask
             /** @var $this->deployment \ZendServerAPI\Deployment */
             $remove = $this->deployment->applicationRemove($this->appId);
         } catch(Exception $e) {
-            echo "Remove failed: " . $e->getMessage() . PHP_EOL;
-            return -1;
+            throw new  \BuildException($e);
         }
         
-        $this->setProperties($remove);
+        $this->buildProperties($remove);
     }
 }
 

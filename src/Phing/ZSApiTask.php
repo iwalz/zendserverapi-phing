@@ -1,4 +1,6 @@
 <?php
+use ZendServerAPI\DataTypes\DataType;
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -46,15 +48,27 @@ abstract class ZSApiTask extends Task
         return $this->server;
     }
     
-    public function init() 
-    {
-
-    }
-    
-    public function setProperties($dataType) {
-        $values = $dataType->getArray();
+    public function buildProperties($dataType, $parent = null) {
+        if($dataType instanceof DataType)
+            $values = $dataType->getArray();
+        elseif(is_array($dataType)) 
+            $values = $dataType;
+        
         foreach($values as $key => $value) {
-            $this->project->setProperty($this->returnProperty.'.'.$key, $value);
+
+            if(is_array($value)) {
+                $this->buildProperties($value, $key);
+            } else {
+                if(is_null($parent)) {
+                    $propertyKey = $this->returnProperty.'.'.$key;
+                    if(!$this->project->getProperty($propertyKey))
+                        $this->project->setProperty($propertyKey, $value);
+                } else {
+                    $propertyKey = $this->returnProperty.'.'.$parent.'.'.$key;
+                    if(!$this->project->getProperty($propertyKey))
+                        $this->project->setProperty($propertyKey, $value);
+                }
+            }
         }
     }
     
