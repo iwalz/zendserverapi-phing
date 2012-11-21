@@ -31,34 +31,39 @@ class ApplicationStatus extends ZSApiTask
     private $userAppName = null;
     private $appName = null;
     private $deployment = null;
-    
+
     public function setUserAppName($userAppName)
     {
         $this->userAppName = $userAppName;
     }
-    
+
     public function setAppName($appName)
     {
         $this->appName = $appName;
     }
-    
+
     public function setBaseUrl($baseUrl)
     {
         $this->baseUrl = $baseUrl;
     }
-    
-    public function main() 
+
+    public function main()
     {
+        if (empty($this->returnProperty)) {
+            throw new \BuildException('ApplicationStatus needs a "returnProperty" parameter');
+        }
+
         $this->deployment = new \ZendServerAPI\Deployment($this->server);
-        $found = false;
-        
+
         try {
             /** @var $this->deployment \ZendServerAPI\Deployment */
             $deploy = $this->deployment->applicationGetStatus();
         } catch(Exception $e) {
-            throw new  \BuildException($e);
+            throw new \BuildException($e);
         }
-        
+
+        $found = false;
+
         foreach($deploy as $app) {
             if($this->baseUrl && $this->baseUrl == $app->getBaseUrl()) {
                 $found = true;
@@ -74,9 +79,8 @@ class ApplicationStatus extends ZSApiTask
                 break;
             }
         }
-        
-        if(!$found)
-            $this->project->setProperty($this->returnProperty, false);
+
+        $this->project->setProperty($this->returnProperty, $found);
     }
 }
 
