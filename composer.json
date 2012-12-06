@@ -3,6 +3,7 @@
     "description": "Zend Server API Phing Wrapper",
     "type": "library",
     "license": "MIT",
+    "version": "0.0.1",
     "keywords": [
         "zend server",
         "api",
@@ -24,9 +25,9 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendserverapi/zendserverapi": "dev-master"
+        "zendserverapi/zendserverapi": "0.0.1"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "include-path": ["vendor/zendserverapi/zendserverapi-phing/src/"],
     "autoload": {
         "classmap": [ "src/" ]
