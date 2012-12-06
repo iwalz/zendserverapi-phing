@@ -36,10 +36,10 @@ class RestartPhp extends ZSApiTask
     
     public function main() 
     {
-        $this->serverTask = new \ZendServerAPI\Server($this->server);
+        $this->serverTask = new \ZendService\ZendServerAPI\Server($this->server);
 
         try {
-            /** @var $this->serverTask \ZendServerAPI\Server */
+            /** @var $this->serverTask \ZendService\ZendServerAPI\Server */
             $restartPhp = $this->serverTask->restartPhp();
         } catch(Exception $e) {
             throw new  \BuildException($e);

@@ -36,9 +36,9 @@ class ApplicationRemove extends ZSApiTask
     
     public function main() 
     {
-        $this->deployment = new \ZendServerAPI\Deployment($this->server);
+        $this->deployment = new \ZendService\ZendServerAPI\Deployment($this->server);
         try {
-            /** @var $this->deployment \ZendServerAPI\Deployment */
+            /** @var $this->deployment \ZendService\ZendServerAPI\Deployment */
             $remove = $this->deployment->applicationRemove($this->appId);
         } catch(Exception $e) {
             throw new  \BuildException($e);

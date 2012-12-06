@@ -102,7 +102,7 @@ class ApplicationDeploy extends ZSApiTask
 
     public function main()
     {
-        $this->deployment = new \ZendServerAPI\Deployment($this->server);
+        $this->deployment = new \ZendService\ZendServerAPI\Deployment($this->server);
         $userParams = array();
         foreach($this->parameters as $parameter)
         {
@@ -110,7 +110,7 @@ class ApplicationDeploy extends ZSApiTask
         }
 
         try {
-            /** @var $this->deployment \ZendServerAPI\Deployment */
+            /** @var $this->deployment \ZendService\ZendServerAPI\Deployment */
             $deploy = $this->deployment->applicationDeploy(
                 $this->appPackage,
                 $this->baseUrl,

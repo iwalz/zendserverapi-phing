@@ -1,5 +1,5 @@
 <?php
-use ZendServerAPI\DataTypes\DataType;
+use ZendService\ZendServerAPI\DataTypes\DataType;
 
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS

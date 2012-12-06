@@ -53,10 +53,10 @@ class ApplicationStatus extends ZSApiTask
             throw new \BuildException('ApplicationStatus needs a "returnProperty" parameter');
         }
 
-        $this->deployment = new \ZendServerAPI\Deployment($this->server);
+        $this->deployment = new \ZendService\ZendServerAPI\Deployment($this->server);
 
         try {
-            /** @var $this->deployment \ZendServerAPI\Deployment */
+            /** @var $this->deployment \ZendService\ZendServerAPI\Deployment */
             $deploy = $this->deployment->applicationGetStatus();
         } catch(Exception $e) {
             throw new \BuildException($e);

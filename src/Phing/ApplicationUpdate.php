@@ -62,14 +62,14 @@ class ApplicationUpdate extends ZSApiTask
     
     public function main() 
     {
-        $this->deployment = new \ZendServerAPI\Deployment($this->server);
+        $this->deployment = new \ZendService\ZendServerAPI\Deployment($this->server);
         $userParams = array();
         foreach($this->parameters as $parameter)
         {
             $userParams[$parameter->getName()] = $parameter->getValue();
         }
         try {
-            /** @var $this->deployment \ZendServerAPI\Deployment */
+            /** @var $this->deployment \ZendService\ZendServerAPI\Deployment */
             $update = $this->deployment->applicationUpdate(
                     $this->appId, 
                     $this->appPackage, 

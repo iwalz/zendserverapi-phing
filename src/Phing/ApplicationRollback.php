@@ -36,10 +36,10 @@ class ApplicationRollback extends ZSApiTask
     
     public function main() 
     {
-        $this->deployment = new \ZendServerAPI\Deployment($this->server);
+        $this->deployment = new \ZendService\ZendServerAPI\Deployment($this->server);
 
         try {
-            /** @var $this->deployment \ZendServerAPI\Deployment */
+            /** @var $this->deployment \ZendService\ZendServerAPI\Deployment */
             $rollback = $this->deployment->applicationRollback($this->appId);
         } catch(Exception $e) {
             throw new  \BuildException($e);
