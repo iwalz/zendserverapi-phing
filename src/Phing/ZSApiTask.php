@@ -30,12 +30,21 @@ require_once 'vendor/autoload.php';
 abstract class ZSApiTask extends Task
 {
     protected $server = null;
+    /**
+     * @var string
+     */
     protected $returnProperty = null;
-    
+
+    /**
+     * @param string $returnProperty
+     */
     public function setReturnProperty($returnProperty) {
         $this->returnProperty = $returnProperty;
     }
     
+    /**
+     * @return string
+     */
     public function getReturnProperty() {
         return $this->returnProperty;
     }
@@ -48,6 +57,13 @@ abstract class ZSApiTask extends Task
         return $this->server;
     }
     
+    /**
+     * Sets all application properties to the phing environment.
+     *
+     * @param DataType|array $dataType
+     * @param string $parent
+     * @return boolean
+     */
     public function buildProperties($dataType, $parent = null) {
         if($dataType instanceof DataType)
             $values = $dataType->getArray();
