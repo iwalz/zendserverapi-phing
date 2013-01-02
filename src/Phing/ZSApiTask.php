@@ -66,7 +66,7 @@ abstract class ZSApiTask extends Task
      */
     public function buildProperties($dataType, $parent = null) {
         if($dataType instanceof DataType)
-            $values = $dataType->getArray();
+            $values = $dataType->extract();
         elseif(is_array($dataType)) 
             $values = $dataType;
         
